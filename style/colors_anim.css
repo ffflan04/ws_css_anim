@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:800,900");
+
+:root {
+    --colors: 1500ms;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+
+.container { /* flex 当てちゃったよぉ。*/
+    display: flex;
+    height: 100vh; /* 高さを設定しないと、align-item が効かないんですよ。*/
+    justify-content: center;
+    align-items: center; /* display flex の力技で、中央寄せです。*/
+    background: #1e152a;
+}
+h1 {
+    color: black;
+    font-size: 10rem; /* フォントサイズは、rem を使ったほうがいいらしい。*/
+    font-weight: 900;
+    letter-spacing: 15px;
+}
+
+.container h1 span:nth-child(1) {
+    animation: colors 1500ms infinite alternate;
+}
+.container h1 span:nth-child(2) {
+    animation: colors var(--colors) 0.2s infinite alternate;
+}
+.container h1 span:nth-child(3) {
+    animation: colors var(--colors) 0.4s infinite alternate;
+}
+.container h1 span:nth-child(4) {
+    animation: colors var(--colors) 0.6s infinite alternate;
+}
+.container h1 span:nth-child(5) {
+    animation: colors var(--colors) 0.8s infinite alternate;
+}
+@keyframes colors {
+    0% {
+        color: #eff7ff;
+    }
+    25% {
+        color: #e8db7d;
+    }
+    50% {
+        color: #558c8c;
+    }
+    75% {
+        color: #82204a;
+    }
+    100% {
+        color: #eff7ff;
+    }
+}

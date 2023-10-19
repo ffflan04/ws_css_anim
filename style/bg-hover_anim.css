@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 1.5rem;
+}
+.title h1 {
+    z-index: 1; /* z-index を、titleクラスで設定すると、アイコンのhoverが反応しなくなるんだ */
+    text-shadow: 0 0 60px violet, 0 0 60px violet;
+    /* text-shadow -> 左右の位置 上下の位置 影のぼかし具合 影の色; */
+    /* 複数指定できるなんて凄い！！ */
+}
+
+section { /* メインキャンバス */
+    width: 100%;
+    height: 100vh;
+    background-color: #111; /* うーん。背景色黒すぎない？ */
+    overflow: hidden; /* 画面からはみ出る要素を抹消する便利なやつ */
+    user-select: none; /* ページ内のDOMを選択、操作ができないようになります。*/
+}
+
+section .row {
+    display: flex; /* 子要素達を横並びにぃぃ〜 */
+    white-space: nowrap; /* 画面が縮小しても、テキストを改行しません。*/
+    font-size: 64px; /* あれ、親要素に指定でも、font-size って反映されるんだな。えー。不便 */
+    transform: rotate(-30deg);
+    position: relative; /* 難しいこと考えず、ただ移動したいだけなら、relativeがいいかもね。*/
+    top: -50%;
+    left: -10%;
+}
+section .row div {
+    animation: move 15s linear infinite normal;
+}
+@keyframes move {
+    0% {
+
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+i {
+    color: rgba(0, 0, 0, 0.9); /* これの第４引数は、透明度だって */
+    transition: 1s; /* こっちだけにtransitionを設置したら、hover時と通常時、どちらにも適用されてまうから */
+}
+i:hover { /* なに！？ただのhoverクラスだとぉ？ 盲点だわ。*/
+    color: violet;
+    text-shadow: 0 0 120px violet; /* んだこれ。変わってる気がしねぇ。*/
+    transition: 0s; /* 継承したhover時のtransitionプロパティを打ち消します。*/
+}

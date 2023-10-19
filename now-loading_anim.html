@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now-Loading_anim</title>
+    <link rel="stylesheet" href="style/now-loading_anim.css">
+</head>
+<body>
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <h2>Now Loading...</h2>
+    </div>
+
+    <script>
+        const $loader = document.querySelector('.loader')
+        const $span = document.querySelectorAll('span')
+        const $h2 = document.querySelector('h2')
+        
+        const second = function(){
+            // fadeoutアニメーションが終わった直後に、
+            // DOM要素を消して、新しいDOM要素を、挿入します。
+            $span.forEach((span) => {
+                span.style.display = 'none' // DOM要素を消すぅ。
+            });
+            $h2.style.display = 'none' // DOM要素を消すぅ。
+
+            // 背景画像を変える。
+            // 背景画像の差し替えのアニメーションは、
+            // textの差し替えのアニメーションと同じにします。
+            // 既存の背景画像を透明にして、新規の背景画像を透明〜出現させます。
+            const $body = document.querySelector('body')
+            $body.style.backgroundImage = 'url(./img/cod01.jpeg)'
+            // うひ。cssファイルとは、相対パスが違ったわww
+
+            const $h1 = document.createElement('h1')
+            $h1.innerText = 'Contents here' // キャンバスにContents here を出現させる
+            $h1.style.animation = 'appear-text 1s ease forwards 0s normal'
+            $loader.appendChild($h1)
+        }
+        
+        const disappear = function(){
+            // loaderクラスの中身を消す処理
+            $span.forEach((span) => {
+                span.style.animation = 'fadeout-border 1s ease forwards 0s normal'
+            });
+            $h2.style.animation = 'fadeout-text 1s ease forwards 0s normal'
+            // 背景画像を消す処理
+            const $body = document.querySelector('body')
+            $body.classList.add('body-fadeout')
+            // コンテンツや背景画像を出現させる処理
+            setTimeout(second, 1000)
+        }
+        setTimeout(disappear, 5000)
+    </script>
+</body>
+</html>

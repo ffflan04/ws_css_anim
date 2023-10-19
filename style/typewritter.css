@@ -1,0 +1,57 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root { /* css変数とかいうものを、定義 */
+    --background-color: gray;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    background: var(--background-color); /*  var() で、css変数を呼び出します。*/
+}
+main h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    position: relative; /* えー。絶対値、ログイン */
+    overflow: hidden; /* 要素からはみでた部分を隠します。凄い！ */
+}
+main h1::before,
+main h1::after { /* まぁ、beforeと、after の共通の処理をまとめてが、わかりずらいからやめてほしいね */
+    content: "";
+    position: absolute;
+    top: 0%; /* えー。このpositionセレクタは、つまり、既存の、h1タグに上書き目的ですよね。*/
+    left: 0;
+    width: 100%; /* これは、親要素(ここでいう<h1>)の、つまり、既存の、h1タグに上書き目的ですよね。 */
+    height: 100%;
+}
+main h1::before { /* 文字を隠す動的なカーテンの役割 */
+    animation: typewrite 4s steps(18) 1s forwards;
+    background: var(--background-color);
+    /* linear=直線的なアニメーション, forwards=終わったらそのまま, */
+    /* steps=文字数の数だけ、段階的にアニメーションを進める。*/
+    /* steps(18)の後の、数値は、アニメーション開始の遅延を決める */
+}
+main h1::after { /* 点滅するカーソルのアニメーション */
+    animation: typewrite 4s steps(18) 1s forwards,
+    blink 500ms steps(18) infinite; /* アニメーションは複数定義できる。凄いだろ。*/
+    background: black;
+    width: 0.1em;
+}
+
+@keyframes typewrite {
+    100% {
+        left: 100%;
+    }
+}
+@keyframes blink {
+    100% {
+        background: transparent;
+    }
+}
